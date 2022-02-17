@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+        stage('Before') {
+            steps {
+                echo 'B4'
+            }
+        }
+        stage('Parallel') {
+            parallel {
+                stage('apple') {
+                    steps {
+                        echo 'red apple'
+                        sleep 4
+                        echo 'green apple'
+                    }
+                }
+                stage('banana') {
+                    steps {
+                        echo 'red banana'
+                        sleep 2
+                        echo 'purple banana'
+                    }
+                }
+                stage('peach') {
+                    steps {
+                        echo 'white peach'
+                        sleep 1
+                        echo 'yellow peach'
+                    }
+                }
+            }
+        }
+        stage('After') {
+            steps {
+                echo 'After'
+            }
+        }
+    }
+}
